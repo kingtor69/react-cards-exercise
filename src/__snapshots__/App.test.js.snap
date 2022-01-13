@@ -4,6 +4,26 @@ exports[`renders snapshot 1`] = `
 <DocumentFragment>
   <div
     class="App"
-  />
+  >
+    <div
+      class="Cards"
+    >
+      <h2>
+        Let's throw some cards around, eh?
+      </h2>
+      <button
+        class="big-btn"
+      >
+        shuffle 1 deck
+      </button>
+      <br />
+      <button>
+        more decks
+      </button>
+      <button>
+        fewer decks
+      </button>
+    </div>
+  </div>
 </DocumentFragment>
 `;

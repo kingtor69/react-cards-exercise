@@ -1,12 +1,12 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import App from './App';
+import Cards from './Cards';
 
 it('renders without crashing', () => {
-  render(<App />);
+  render(<Cards />);
 });
 
 it('renders snapshot', () => {
-  const { asFragment } = render(<App />);
+  const { asFragment } = render(<Cards />);
   expect(asFragment()).toMatchSnapshot();
 });
