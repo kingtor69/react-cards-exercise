@@ -42,26 +42,57 @@ const Cards = ({deckBaseUrl, deckNewEnd, deckDrawEnd}) => {
       <h2>Let's throw some cards around, eh?</h2>
       {(cardsRemaining > 0) 
         ? <>
-            <button onClick={dealCard} className="big-btn">deal {numCards} card{(numCards > 1) ? 's' : ''}</button> 
+            <button 
+              onClick={dealCard} 
+              className="big-btn"
+              data-testid="deal"
+            >
+              deal {numCards} card{(numCards > 1) ? 's' : ''}
+            </button> 
             <br />
-            <button onClick={fewerCards}>fewer cards</button>
-            <button onClick={moreCards}>more cards</button>
+            <button 
+              onClick={fewerCards}
+              data-testid="fewer-cards"
+            >
+              fewer cards
+            </button>
+            <button 
+              onClick={moreCards}
+              data-testid="more-cards"
+            >
+              more cards
+            </button>
           </>
         : <>
-            <button onClick={shuffleNewDeck} className="big-btn">shuffle {numDecks} deck{(numDecks > 1) ? 's' : ''}</button> 
+            <button 
+              onClick={shuffleNewDeck} className="big-btn"
+              data-testid="shuffle"
+            >
+              shuffle {numDecks} deck{(numDecks > 1) ? 's' : ''}
+            </button> 
             <br />
-            <button onClick={() => {setNumDecks(numDecks -1)}}>fewer decks</button>
-            <button onClick={() => {setNumDecks(numDecks +1)}}>more decks</button>
+            <button 
+              onClick={() => {setNumDecks(numDecks -1)}}
+              data-testid="fewer-decks"
+            >
+              fewer decks
+            </button>
+            <button 
+              onClick={() => {setNumDecks(numDecks +1)}}
+              data-testid="more-decks"
+            >
+              more decks
+            </button>
           </>
       }
       <div className="table">
         {dealtCards.map((card, i) => (
-          <Card 
-            img={card.image}
-            code={card.code}
-            offset={`${i*20}px`}
-            key={i} 
-          />
+            <Card 
+              img={card.image}
+              code={card.code}
+              offset={i*20}
+              key={i} 
+            />
         ))}
       </div>
     </div>

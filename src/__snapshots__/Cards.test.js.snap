@@ -10,16 +10,24 @@ exports[`renders snapshot 1`] = `
     </h2>
     <button
       class="big-btn"
+      data-testid="shuffle"
     >
       shuffle 1 deck
     </button>
     <br />
-    <button>
+    <button
+      data-testid="fewer-decks"
+    >
       fewer decks
     </button>
-    <button>
+    <button
+      data-testid="more-decks"
+    >
       more decks
     </button>
+    <div
+      class="table"
+    />
   </div>
 </DocumentFragment>
 `;
