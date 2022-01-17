@@ -15,10 +15,10 @@ exports[`renders snapshot 1`] = `
     </button>
     <br />
     <button>
-      more decks
+      fewer decks
     </button>
     <button>
-      fewer decks
+      more decks
     </button>
   </div>
 </DocumentFragment>

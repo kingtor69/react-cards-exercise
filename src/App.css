@@ -12,3 +12,11 @@ button {
 .big-btn {
 	font-size: 2em;
 }
+
+.table {
+	position: relative;
+}
+
+.Card {
+	position: absolute;
+}

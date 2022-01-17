@@ -1,30 +1,41 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState, useEffect} from 'react';
 import axios from 'axios';
+import Card from './Card';
 
 const Cards = ({deckBaseUrl, deckNewEnd, deckDrawEnd}) => {
   const [numDecks, setNumDecks] = useState(1);
   const [numCards, setNumCards] = useState(1);
-  const [deckUrl, setDeckUrl] = useState(`${deckBaseUrl}${deckNewEnd}${numDecks}`);
   const [deckId, setDeckId] = useState(null);
-  const [cardUrl, setCardUrl] = useState(null);
   const [cardsRemaining, setCardsRemaining] = useState(0);
+  const [dealtCards, setDealtCards] = useState([]);
 
   const shuffleNewDeck = async () => {
-    const res = await axios.get(deckUrl);
+    const res = await axios.get(`${deckBaseUrl}${deckNewEnd}${numDecks}`);
     setDeckId(res.data.deck_id);
     setCardsRemaining(res.data.remaining);
-    setCardUrl(`${deckBaseUrl}${deckId}${deckDrawEnd}${numCards}`);
   };
 
   const dealCard = async () => {
-    const res = await axios.get(cardUrl);
+    const res = await axios.get(`${deckBaseUrl}${deckId}${deckDrawEnd}${numCards}`);
     setCardsRemaining(res.data.remaining);
-
-  }
+    setDealtCards(dealtCards => [...dealtCards, ...res.data.cards]);
+  };
 
   useEffect(() => {
     shuffleNewDeck();
   }, []);
+
+  const fewerCards = () => {
+    if (numCards > 1) {
+      setNumCards(numCards -1)
+    };
+  };
+
+  const moreCards = () => {
+    if (numCards < cardsRemaining) {
+      setNumCards(numCards +1)
+    };
+  };
 
   return (
     <div className="Cards">
@@ -33,17 +44,26 @@ const Cards = ({deckBaseUrl, deckNewEnd, deckDrawEnd}) => {
         ? <>
             <button onClick={dealCard} className="big-btn">deal {numCards} card{(numCards > 1) ? 's' : ''}</button> 
             <br />
-            <button onClick={() => {setNumCards(numCards +1)}}>more cards</button>
-            <button onClick={() => {setNumCards(numCards -1)}}>fewer cards</button>
+            <button onClick={fewerCards}>fewer cards</button>
+            <button onClick={moreCards}>more cards</button>
           </>
         : <>
             <button onClick={shuffleNewDeck} className="big-btn">shuffle {numDecks} deck{(numDecks > 1) ? 's' : ''}</button> 
             <br />
-            <button onClick={() => {setNumDecks(numDecks +1)}}>more decks</button>
             <button onClick={() => {setNumDecks(numDecks -1)}}>fewer decks</button>
+            <button onClick={() => {setNumDecks(numDecks +1)}}>more decks</button>
           </>
       }
-      
+      <div className="table">
+        {dealtCards.map((card, i) => (
+          <Card 
+            img={card.image}
+            code={card.code}
+            offset={`${i*20}px`}
+            key={i} 
+          />
+        ))}
+      </div>
     </div>
   );
 };
