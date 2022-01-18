@@ -1,4 +1,6 @@
-# React cards exercise  Springboard Software Engineering Career Track  Tor Kingdon
+# React cards exercise  
+Springboard Software Engineering Career Track  
+Tor Kingdon
 I didn't see where using useRef would help me in this, and only saw useEffect coming in handy once. I'm sure I missed something and am looking forward to discussing what it was.
 
 All code by Tor Kingdon, except as created by:
